@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -21,12 +22,12 @@ public class NewsController {
 //    private ArticleService articleService;
 
     @GetMapping("/")
-    public ResponseEntity<?> getNews(Authentication authentication) {
+    public List<NewsResponseDto> getNews(Authentication authentication) {
 //        return newsService.getNews(authentication.getName())
 //                .map(news -> ResponseEntity.ok(news))
 //                .defaultIfEmpty(ResponseEntity.notFound().build());
 
-        return ResponseEntity.ok().body(newsService.getNews(authentication.getName()));
+        return newsService.getNews(authentication.getName());
     }
 
 //    @PostMapping("/{id}/favorite")

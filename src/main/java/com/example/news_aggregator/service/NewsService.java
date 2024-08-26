@@ -46,32 +46,42 @@ public class NewsService {
         System.out.println("key"+apiKey);
         return webClientBuilder.build()
                 .get()
-                .uri("url"+"&apiKey="+apiKey+"&size=1&language=en&category="+category)
+                .uri("url"+"apiKey="+apiKey+"&size=1&language=en&category="+category)
                 .retrieve()
                 .bodyToMono(NewsResponseDto.class);
     }
 
-//    public Mono<NewsResponseDto> fetchNews(String category) {
+//    public Mono<List<NewsResponseDto>> fetchNews(String category) {
 //        String apiKey = dotenv.get("API_KEY");
 //        System.out.println("key"+apiKey);
 //        System.out.println("url"+url);
 //        System.out.println(url+"apiKey="+apiKey+"&size=1&language=en");
-//        return webClientBuilder.build()
+//        int i =0;
+//        return  webClientBuilder.build()
 //                .get()
-//                .uri(url+"&apiKey="+apiKey+"&size=1&language=en")
+//                .uri(url+"apiKey="+apiKey+"&size=1&language=en")
 //                .retrieve()
-//                .bodyToMono(NewsResponseDto.class);
+//                .bodyToMono(String.class)
+//                .flatMap(jsonString -> {
+//                    try {
+//                        List<NewsResponseDto> myResponse = newResponseMapper.JsonToNewsResponseDtoMapper(jsonString);
+//                        System.out.println(myResponse);
+//                        return Mono.just(myResponse);
+//                    } catch (Exception e) {
+//                        return Mono.error(e);
+//                    }
+//                });
 //    }
 
-    public CompletableFuture<NewsResponseDto> fetchNewsAsync(String category) {
-        String apiKey = dotenv.get("API_KEY");
-        System.out.println("key"+apiKey);
-        System.out.println("url"+url);
-        System.out.println(url+"apiKey="+apiKey+"&size=1&language=en");
-        CompletableFuture<NewsResponseDto> n = CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url+"apiKey="+apiKey+"&size=1&language=en", NewsResponseDto.class));
-        System.out.println(n.toString());
-        return n;
-        }
+//    public CompletableFuture<NewsResponseDto> fetchNewsAsync(String category) {
+//        String apiKey = dotenv.get("API_KEY");
+//        System.out.println("key"+apiKey);
+//        System.out.println("url"+url);
+//        System.out.println(url+"apiKey="+apiKey+"&size=1&language=en");
+//        CompletableFuture<NewsResponseDto> n = CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url+"apiKey="+apiKey+"&size=1&language=en", NewsResponseDto.class));
+//        System.out.println(n.toString());
+//        return n;
+//        }
 
     public List<NewsResponseDto> fetchNews(String category) {
         String apiKey = dotenv.get("API_KEY");

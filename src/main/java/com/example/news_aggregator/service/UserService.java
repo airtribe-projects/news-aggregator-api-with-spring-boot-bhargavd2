@@ -50,14 +50,14 @@ public class UserService {
 
 
     public User registerUser(String username, String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-
 
         Optional<User> ifExitsUser = userRepository.findByUsername(username);
         if(ifExitsUser.isPresent())
                 throw new DuplicateUsernameException("Username already exists: " + username);
+
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(passwordEncoder.encode(password));
 
         return userRepository.save(user);
     }

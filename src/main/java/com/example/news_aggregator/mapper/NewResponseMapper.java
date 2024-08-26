@@ -5,6 +5,8 @@ import com.example.news_aggregator.dto.NewsResponseDto;
 import com.example.news_aggregator.dto.ExternalApiResponseResultDto;
 import com.example.news_aggregator.exception.ExternalApiException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.objenesis.instantiator.sun.MagicInstantiator;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Arrays;

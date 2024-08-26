@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -20,7 +20,10 @@ public class PreferencesController {
 
     @GetMapping("/preferences")
     public ResponseEntity<?> getPreferences(Authentication authentication) {
-        return ResponseEntity.ok(userService.getPreferences(authentication.getName()));
+        Map<String, Set<PreferencesEnum>> response = new HashMap<>();
+        response.put("userPreference",userService.getPreferences(authentication.getName()));
+        response.put("avaliablePreferences",new HashSet<>(Arrays.asList(PreferencesEnum.values())));
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/preferences")
